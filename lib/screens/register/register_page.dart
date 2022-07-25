@@ -28,6 +28,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
 
   @override
   void dispose() {
@@ -69,6 +70,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     obscureText: true,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) => value != null && value.length < 6 ? 'Enter min. 6 characters ' : null,
+                  ),
+                  const SizedBox(height: 20),
+                  FormFieldCustom(
+                    labelText: 'Confirm Password',
+                    controller: confirmPasswordController,
+                    obscureText: true,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) => value != passwordController.text ? 'Kata Sandi Tidak Cocok' : null,
                   ),
                   const SizedBox(height: 20),
                   ButtonCustom(

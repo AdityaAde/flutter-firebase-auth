@@ -78,7 +78,7 @@ class _ForgetPasswordBodyState extends State<ForgetPasswordBody> {
 
       Utils.showSnackBar('setel ulang kata sandi telah terkirim ke email');
       Navigator.of(context).popUntil((route) => route.isFirst);
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       Utils.showSnackBar('Masukan Email');
       Navigator.of(context).pop();
     }

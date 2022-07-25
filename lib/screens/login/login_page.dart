@@ -24,7 +24,7 @@ class LoginScreen extends StatelessWidget {
           } else if (snapshot.hasError) {
             return const Center(child: Text('Terjadi Kesalahan!'));
           } else if (snapshot.hasData) {
-            return const HomeScreen();
+            return const VerifyEmailScreen();
           } else {
             return const AuthScreen();
           }
