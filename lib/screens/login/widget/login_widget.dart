@@ -28,6 +28,7 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: CanvasBackgorundImage(
@@ -59,6 +60,19 @@ class _LoginWidgetState extends State<LoginWidget> {
                   onPressed: signIn,
                 ),
                 const SizedBox(height: 24),
+                InkWell(
+                  child: Text(
+                    'Forgot Password?',
+                    style: theme.textTheme.bodyLarge!.copyWith(
+                      fontSize: 14,
+                      color: theme.colorScheme.background,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.pushNamed(context, '/forget-password');
+                  },
+                ),
+                const SizedBox(height: 10),
                 RichText(
                     text: TextSpan(
                   style: const TextStyle(color: Colors.white),
@@ -68,7 +82,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       recognizer: TapGestureRecognizer()..onTap = widget.onClickedSignUp,
                       text: 'Sign Up',
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.background,
+                        color: theme.colorScheme.background,
                       ),
                     ),
                   ],

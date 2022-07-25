@@ -1,3 +1,4 @@
+import 'package:application_login/screens/forget_password/widget/forget_password_body.dart';
 import 'package:flutter/material.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
@@ -13,8 +14,8 @@ class ForgetPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Halaman Lupa Password')),
+    return const Scaffold(
+      body: ForgetPasswordBody(),
     );
   }
 }
