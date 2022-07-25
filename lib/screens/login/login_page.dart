@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'widget/login_widget.dart';
 import '../screens.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -27,7 +26,7 @@ class LoginScreen extends StatelessWidget {
           } else if (snapshot.hasData) {
             return const HomeScreen();
           } else {
-            return const LoginWidget();
+            return const AuthScreen();
           }
         });
   }

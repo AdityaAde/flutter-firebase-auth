@@ -1,11 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../../config/config.dart';
 import '../../../main.dart';
 import '../../../widgets/widgets.dart';
 
 class LoginWidget extends StatefulWidget {
-  const LoginWidget({Key? key}) : super(key: key);
+  const LoginWidget({Key? key, required this.onClickedSignUp}) : super(key: key);
+
+  final VoidCallback onClickedSignUp;
 
   @override
   State<LoginWidget> createState() => _LoginWidgetState();
@@ -54,6 +58,21 @@ class _LoginWidgetState extends State<LoginWidget> {
                   buttonText: 'Sign In',
                   onPressed: signIn,
                 ),
+                const SizedBox(height: 24),
+                RichText(
+                    text: TextSpan(
+                  style: const TextStyle(color: Colors.white),
+                  text: 'No Account? ',
+                  children: [
+                    TextSpan(
+                      recognizer: TapGestureRecognizer()..onTap = widget.onClickedSignUp,
+                      text: 'Sign Up',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.background,
+                      ),
+                    ),
+                  ],
+                ))
               ],
             ),
           ),
@@ -76,7 +95,7 @@ class _LoginWidgetState extends State<LoginWidget> {
         password: passwordController.text.trim(),
       );
     } on FirebaseAuthException catch (e) {
-      print(e);
+      Utils.showSnackBar(e.message);
     }
 
     navigatorKey.currentState!.popUntil((route) => route.isFirst);

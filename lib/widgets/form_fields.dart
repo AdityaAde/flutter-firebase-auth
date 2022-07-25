@@ -5,16 +5,20 @@ class FormFieldCustom extends StatelessWidget {
     Key? key,
     this.controller,
     this.obscureText = false,
+    this.validator,
+    this.autovalidateMode,
     required this.labelText,
   }) : super(key: key);
 
   final TextEditingController? controller;
   final String labelText;
   final bool obscureText;
+  final FormFieldValidator<String>? validator;
+  final AutovalidateMode? autovalidateMode;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       style: const TextStyle(color: Colors.white),
       controller: controller,
       cursorColor: Colors.white,
@@ -33,6 +37,8 @@ class FormFieldCustom extends StatelessWidget {
         ),
       ),
       obscureText: obscureText,
+      autovalidateMode: autovalidateMode,
+      validator: validator,
     );
   }
 }
