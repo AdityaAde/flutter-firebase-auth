@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../screens.dart';
+import 'widget/auth.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -26,7 +27,7 @@ class LoginScreen extends StatelessWidget {
           } else if (snapshot.hasData) {
             return const VerifyEmailScreen();
           } else {
-            return const AuthScreen();
+            return const Authentication();
           }
         });
   }

@@ -1,8 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 import '../../../config/config.dart';
 import '../../../widgets/widgets.dart';
@@ -27,6 +27,10 @@ class _ForgetPasswordBodyState extends State<ForgetPasswordBody> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final emailValidator = MultiValidator([
+      RequiredValidator(errorText: 'password is required'),
+      EmailValidator(errorText: 'enter a valid email'),
+    ]);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Forget Password'),
@@ -48,7 +52,7 @@ class _ForgetPasswordBodyState extends State<ForgetPasswordBody> {
                   labelText: 'Email',
                   controller: emailController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (email) => email != null && !EmailValidator.validate(email) ? 'Enter a valid email' : null,
+                  validator: emailValidator,
                 ),
                 const SizedBox(height: 20),
                 ButtonCustom(

@@ -1,21 +1,22 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 import '../../../config/config.dart';
 import '../../../main.dart';
 import '../../../widgets/widgets.dart';
 
-class LoginWidget extends StatefulWidget {
-  const LoginWidget({Key? key, required this.onClickedSignUp}) : super(key: key);
+class LoginBody extends StatefulWidget {
+  const LoginBody({Key? key, required this.onClickedSignUp}) : super(key: key);
 
   final VoidCallback onClickedSignUp;
 
   @override
-  State<LoginWidget> createState() => _LoginWidgetState();
+  State<LoginBody> createState() => _LoginBodyState();
 }
 
-class _LoginWidgetState extends State<LoginWidget> {
+class _LoginBodyState extends State<LoginBody> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -29,6 +30,15 @@ class _LoginWidgetState extends State<LoginWidget> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final emailValidator = MultiValidator([
+      RequiredValidator(errorText: 'password is required'),
+      EmailValidator(errorText: 'enter a valid email'),
+    ]);
+    final passwordValidator = MultiValidator([
+      RequiredValidator(errorText: 'password is required'),
+      MinLengthValidator(8, errorText: 'password must be at least 8 digits long'),
+      PatternValidator('.*[a-z].*', errorText: 'Input harus berisi huruf kecil'),
+    ]);
     return Scaffold(
       body: SingleChildScrollView(
         child: CanvasBackgorundImage(
@@ -47,12 +57,16 @@ class _LoginWidgetState extends State<LoginWidget> {
                 FormFieldCustom(
                   labelText: 'Email',
                   controller: emailController,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: emailValidator,
                 ),
                 const SizedBox(height: 20),
                 FormFieldCustom(
                   labelText: 'Password',
                   controller: passwordController,
                   obscureText: true,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: passwordValidator,
                 ),
                 const SizedBox(height: 20),
                 ButtonCustom(

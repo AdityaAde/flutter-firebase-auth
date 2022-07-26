@@ -8,6 +8,8 @@ class AppRouter {
         return LoginScreen.route();
       case '/register':
         return RegisterScreen.route();
+      case '/verify-email':
+        return VerifyEmailScreen.route();
       case '/home':
         return HomeScreen.route();
       case '/forget-password':
